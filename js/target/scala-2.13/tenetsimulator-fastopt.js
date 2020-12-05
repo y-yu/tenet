@@ -5274,34 +5274,6 @@ function $m_sjsr_package$() {
   return $n_sjsr_package$
 }
 /** @constructor */
-function $c_s_sys_package$() {
-  /*<skip>*/
-}
-$c_s_sys_package$.prototype = new $h_O();
-$c_s_sys_package$.prototype.constructor = $c_s_sys_package$;
-/** @constructor */
-function $h_s_sys_package$() {
-  /*<skip>*/
-}
-$h_s_sys_package$.prototype = $c_s_sys_package$.prototype;
-$c_s_sys_package$.prototype.error__T__E = (function(message) {
-  throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O($ct_jl_RuntimeException__T__(new $c_jl_RuntimeException(), message))
-});
-var $d_s_sys_package$ = new $TypeData().initClass({
-  s_sys_package$: 0
-}, false, "scala.sys.package$", {
-  s_sys_package$: 1,
-  O: 1
-});
-$c_s_sys_package$.prototype.$classData = $d_s_sys_package$;
-var $n_s_sys_package$;
-function $m_s_sys_package$() {
-  if ((!$n_s_sys_package$)) {
-    $n_s_sys_package$ = new $c_s_sys_package$()
-  };
-  return $n_s_sys_package$
-}
-/** @constructor */
 function $c_s_util_control_NonFatal$() {
   /*<skip>*/
 }
@@ -6147,29 +6119,9 @@ function $h_Ltenet_simulator_Main$() {
   /*<skip>*/
 }
 $h_Ltenet_simulator_Main$.prototype = $c_Ltenet_simulator_Main$.prototype;
-$c_Ltenet_simulator_Main$.prototype.parse__T__T = (function(source) {
+$c_Ltenet_simulator_Main$.prototype.execute__T__sjs_js_Tuple5 = (function(source) {
   try {
-    var this$1 = this.Ltenet_simulator_Main$__f_parser.parse__T__sci_List(source);
-    return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$1, "", "\n", "")
-  } catch (e) {
-    var e$2 = $m_sjsr_package$().wrapJavaScriptException__O__jl_Throwable(e);
-    if ((e$2 !== null)) {
-      if ((e$2 !== null)) {
-        var o11 = $m_s_util_control_NonFatal$().unapply__jl_Throwable__s_Option(e$2);
-        if ((!o11.isEmpty__Z())) {
-          var e$3 = $as_jl_Throwable(o11.get__O());
-          return e$3.getMessage__T()
-        }
-      };
-      throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(e$2)
-    } else {
-      throw e
-    }
-  }
-});
-$c_Ltenet_simulator_Main$.prototype.eval__T__sjs_js_Tuple3 = (function(source) {
-  try {
-    var asm = this.Ltenet_simulator_Main$__f_parser.parse__T__sci_List(source);
+    var asm = $as_sci_List(this.Ltenet_simulator_Main$__f_parser.parse__T__s_util_Try(source).get__O());
     var this$1 = this.Ltenet_simulator_Main$__f_random;
     var x = this$1.s_util_Random__f_self.nextInt__I__I(100);
     var randomNumber = ((x < 0) ? ((-x) | 0) : x);
@@ -6183,10 +6135,13 @@ $c_Ltenet_simulator_Main$.prototype.eval__T__sjs_js_Tuple3 = (function(source) {
     var flags = this$8.Ltenet_simulator_register_Registers__f_flags;
     var forwardResult = $$x1.run__Ltenet_simulator_register_Registers__sci_List__Ltenet_simulator_eval_MachineState(new $c_Ltenet_simulator_register_Registers(randomNumber, ebx, ecx, flags), asm);
     var backwardResult = this.Ltenet_simulator_Main$__f_eval.run__Ltenet_simulator_register_Registers__sci_List__Ltenet_simulator_eval_MachineState($m_Ltenet_simulator_register_Registers$().Ltenet_simulator_register_Registers$__f_initRegister, forwardResult.Ltenet_simulator_eval_MachineState__f_commandLogs);
-    var _1 = forwardResult.Ltenet_simulator_eval_MachineState__f_registers.pp__T();
-    var _2 = backwardResult.Ltenet_simulator_eval_MachineState__f_registers.pp__T();
-    var _3 = ((forwardResult.Ltenet_simulator_eval_MachineState__f_registers.Ltenet_simulator_register_Registers__f_eax === 0) && (backwardResult.Ltenet_simulator_eval_MachineState__f_registers.Ltenet_simulator_register_Registers__f_eax === randomNumber));
-    return [_1, _2, _3]
+    var _1 = $f_sc_IterableOnceOps__mkString__T__T__T__T(asm, "", "\n", "");
+    var _2 = forwardResult.Ltenet_simulator_eval_MachineState__f_registers.pp__T();
+    var _3 = backwardResult.Ltenet_simulator_eval_MachineState__f_registers.pp__T();
+    var this$10 = forwardResult.Ltenet_simulator_eval_MachineState__f_commandLogs;
+    var _4 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$10, "", "\n", "");
+    var _5 = ((forwardResult.Ltenet_simulator_eval_MachineState__f_registers.Ltenet_simulator_register_Registers__f_eax === 0) && (backwardResult.Ltenet_simulator_eval_MachineState__f_registers.Ltenet_simulator_register_Registers__f_eax === randomNumber));
+    return [_1, _2, _3, _4, _5]
   } catch (e) {
     var e$2 = $m_sjsr_package$().wrapJavaScriptException__O__jl_Throwable(e);
     if ((e$2 !== null)) {
@@ -6196,7 +6151,9 @@ $c_Ltenet_simulator_Main$.prototype.eval__T__sjs_js_Tuple3 = (function(source) {
           var e$3 = $as_jl_Throwable(o11.get__O());
           var _1$1 = e$3.getMessage__T();
           var _2$1 = e$3.getMessage__T();
-          return [_1$1, _2$1, false]
+          var _3$1 = e$3.getMessage__T();
+          var _4$1 = e$3.getMessage__T();
+          return [_1$1, _2$1, _3$1, _4$1, false]
         }
       };
       throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(e$2)
@@ -6205,19 +6162,12 @@ $c_Ltenet_simulator_Main$.prototype.eval__T__sjs_js_Tuple3 = (function(source) {
     }
   }
 });
-$c_Ltenet_simulator_Main$.prototype.$js$exported$meth$parse__T__O = (function(source) {
-  return this.parse__T__T(source)
+$c_Ltenet_simulator_Main$.prototype.$js$exported$meth$execute__T__O = (function(source) {
+  return this.execute__T__sjs_js_Tuple5(source)
 });
-$c_Ltenet_simulator_Main$.prototype.$js$exported$meth$eval__T__O = (function(source) {
-  return this.eval__T__sjs_js_Tuple3(source)
-});
-$c_Ltenet_simulator_Main$.prototype["eval"] = (function(arg) {
+$c_Ltenet_simulator_Main$.prototype.execute = (function(arg) {
   var prep0 = $as_T(arg);
-  return this.$js$exported$meth$eval__T__O(prep0)
-});
-$c_Ltenet_simulator_Main$.prototype.parse = (function(arg) {
-  var prep0 = $as_T(arg);
-  return this.$js$exported$meth$parse__T__O(prep0)
+  return this.$js$exported$meth$execute__T__O(prep0)
 });
 var $d_Ltenet_simulator_Main$ = new $TypeData().initClass({
   Ltenet_simulator_Main$: 0
@@ -6435,10 +6385,21 @@ function $h_Ltenet_simulator_parse_Parser() {
   /*<skip>*/
 }
 $h_Ltenet_simulator_parse_Parser.prototype = $c_Ltenet_simulator_parse_Parser.prototype;
-$c_Ltenet_simulator_parse_Parser.prototype.parse__T__sci_List = (function(string) {
+$c_Ltenet_simulator_parse_Parser.prototype.parse__T__s_util_Try = (function(string) {
   var this$1 = this.Ltenet_simulator_parse_Parser__f_parser;
   var p = this.Ltenet_simulator_parse_Parser__f_parser.Ltenet_simulator_parse_ParserSyntax$Commands__f_commands;
-  return $as_sci_List($f_s_util_parsing_combinator_RegexParsers__parse__s_util_parsing_combinator_Parsers$Parser__jl_CharSequence__s_util_parsing_combinator_Parsers$ParseResult(this$1, p, string).get__O())
+  var x1 = $f_s_util_parsing_combinator_RegexParsers__parse__s_util_parsing_combinator_Parsers$Parser__jl_CharSequence__s_util_parsing_combinator_Parsers$ParseResult(this$1, p, string);
+  if ((x1 instanceof $c_s_util_parsing_combinator_Parsers$Success)) {
+    var x2 = $as_s_util_parsing_combinator_Parsers$Success(x1);
+    var result = $as_sci_List(x2.s_util_parsing_combinator_Parsers$Success__f_result);
+    var next = x2.s_util_parsing_combinator_Parsers$Success__f_next;
+    return (next.atEnd__Z() ? new $c_s_util_Success(result) : new $c_s_util_Failure(new $c_Ltenet_simulator_parse_ParseError("Parser cannot reach at the end of code.", null)))
+  } else if ((x1 instanceof $c_s_util_parsing_combinator_Parsers$NoSuccess)) {
+    var x3 = $as_s_util_parsing_combinator_Parsers$NoSuccess(x1);
+    return new $c_s_util_Failure(new $c_Ltenet_simulator_parse_ParseError((("Parse failed!!!!! (" + x3.msg__T()) + ")."), null))
+  } else {
+    throw new $c_s_MatchError(x1)
+  }
 });
 var $d_Ltenet_simulator_parse_Parser = new $TypeData().initClass({
   Ltenet_simulator_parse_Parser: 0
@@ -9394,9 +9355,6 @@ function $h_s_util_parsing_combinator_Parsers$NoSuccess() {
 $h_s_util_parsing_combinator_Parsers$NoSuccess.prototype = $c_s_util_parsing_combinator_Parsers$NoSuccess.prototype;
 $c_s_util_parsing_combinator_Parsers$NoSuccess.prototype.flatMapWithNext__F1__s_util_parsing_combinator_Parsers$ParseResult = (function(f) {
   return this
-});
-$c_s_util_parsing_combinator_Parsers$NoSuccess.prototype.get__O = (function() {
-  $m_s_sys_package$().error__T__E("No result when parsing failed")
 });
 $c_s_util_parsing_combinator_Parsers$NoSuccess.prototype.map__F1__s_util_parsing_combinator_Parsers$ParseResult = (function(f) {
   return this
@@ -12628,19 +12586,22 @@ function $h_Ltenet_simulator_parse_ParserSyntax$Commands() {
 }
 $h_Ltenet_simulator_parse_ParserSyntax$Commands.prototype = $c_Ltenet_simulator_parse_ParserSyntax$Commands.prototype;
 $c_Ltenet_simulator_parse_ParserSyntax$Commands.prototype.registersName__s_util_parsing_combinator_Parsers$Parser = (function() {
-  return this.Ltenet_simulator_parse_ParserSyntax$Commands__f_name.map__F1__s_util_parsing_combinator_Parsers$Parser(new $c_sjsr_AnonFunction1(((this$1) => ((str$2) => {
-    var str = $as_T(str$2);
-    var x1 = $as_T(str.toLowerCase());
-    if ((x1 === "eax")) {
-      return new $c_Ltenet_simulator_register_RegisterName$Eax()
-    } else if ((x1 === "ebx")) {
-      return new $c_Ltenet_simulator_register_RegisterName$Ebx()
-    } else if ((x1 === "ecx")) {
-      return new $c_Ltenet_simulator_register_RegisterName$Ecx()
+  var f = new $c_sjsr_AnonFunction1(((this$1) => ((in$2) => {
+    var in$1 = $as_s_util_parsing_input_Reader(in$2);
+    var x1 = this$1.Ltenet_simulator_parse_ParserSyntax$Commands__f_name.apply__s_util_parsing_input_Reader__s_util_parsing_combinator_Parsers$ParseResult(in$1);
+    if ((x1 instanceof $c_s_util_parsing_combinator_Parsers$Success)) {
+      var x2 = $as_s_util_parsing_combinator_Parsers$Success(x1);
+      var str = $as_T(x2.s_util_parsing_combinator_Parsers$Success__f_result);
+      var next = x2.s_util_parsing_combinator_Parsers$Success__f_next;
+      var x1$2 = $as_T(str.toLowerCase());
+      return ((x1$2 === "eax") ? new $c_s_util_parsing_combinator_Parsers$Success(this$1, new $c_Ltenet_simulator_register_RegisterName$Eax(), next) : ((x1$2 === "ebx") ? new $c_s_util_parsing_combinator_Parsers$Success(this$1, new $c_Ltenet_simulator_register_RegisterName$Ebx(), next) : ((x1$2 === "ecx") ? new $c_s_util_parsing_combinator_Parsers$Success(this$1, new $c_Ltenet_simulator_register_RegisterName$Ecx(), next) : new $c_s_util_parsing_combinator_Parsers$Failure(this$1, "Register name is invalid", next))))
+    } else if ((x1 instanceof $c_s_util_parsing_combinator_Parsers$NoSuccess)) {
+      return new $c_s_util_parsing_combinator_Parsers$Failure(this$1, "Register name is needed", in$1)
     } else {
       throw new $c_s_MatchError(x1)
     }
-  }))(this)))
+  }))(this));
+  return new $c_s_util_parsing_combinator_Parsers$$anon$1(this, f)
 });
 var $d_Ltenet_simulator_parse_ParserSyntax$Commands = new $TypeData().initClass({
   Ltenet_simulator_parse_ParserSyntax$Commands: 0
@@ -15342,6 +15303,17 @@ function $isArrayOf_s_util_Either(obj, depth) {
 function $asArrayOf_s_util_Either(obj, depth) {
   return (($isArrayOf_s_util_Either(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.util.Either;", depth))
 }
+/** @constructor */
+function $c_s_util_Try() {
+  /*<skip>*/
+}
+$c_s_util_Try.prototype = new $h_O();
+$c_s_util_Try.prototype.constructor = $c_s_util_Try;
+/** @constructor */
+function $h_s_util_Try() {
+  /*<skip>*/
+}
+$h_s_util_Try.prototype = $c_s_util_Try.prototype;
 /** @constructor */
 function $c_s_util_parsing_combinator_Parsers$$tilde(outer, _1, _2) {
   this.s_util_parsing_combinator_Parsers$$tilde__f__1 = null;
@@ -20470,6 +20442,75 @@ function $m_sjsr_WrappedVarArgs$() {
   return $n_sjsr_WrappedVarArgs$
 }
 /** @constructor */
+function $c_s_util_Failure(exception) {
+  this.s_util_Failure__f_exception = null;
+  this.s_util_Failure__f_exception = exception
+}
+$c_s_util_Failure.prototype = new $h_s_util_Try();
+$c_s_util_Failure.prototype.constructor = $c_s_util_Failure;
+/** @constructor */
+function $h_s_util_Failure() {
+  /*<skip>*/
+}
+$h_s_util_Failure.prototype = $c_s_util_Failure.prototype;
+$c_s_util_Failure.prototype.get__O = (function() {
+  throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O(this.s_util_Failure__f_exception)
+});
+$c_s_util_Failure.prototype.productPrefix__T = (function() {
+  return "Failure"
+});
+$c_s_util_Failure.prototype.productArity__I = (function() {
+  return 1
+});
+$c_s_util_Failure.prototype.productElement__I__O = (function(x$1) {
+  return ((x$1 === 0) ? this.s_util_Failure__f_exception : $m_sr_Statics$().ioobe__I__O(x$1))
+});
+$c_s_util_Failure.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this)
+});
+$c_s_util_Failure.prototype.productElementName__I__T = (function(x$1) {
+  return ((x$1 === 0) ? "exception" : $as_T($m_sr_Statics$().ioobe__I__O(x$1)))
+});
+$c_s_util_Failure.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+});
+$c_s_util_Failure.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this)
+});
+$c_s_util_Failure.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else if ((x$1 instanceof $c_s_util_Failure)) {
+    var Failure$1 = $as_s_util_Failure(x$1);
+    var x = this.s_util_Failure__f_exception;
+    var x$2 = Failure$1.s_util_Failure__f_exception;
+    return ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
+  } else {
+    return false
+  }
+});
+function $as_s_util_Failure(obj) {
+  return (((obj instanceof $c_s_util_Failure) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.util.Failure"))
+}
+function $isArrayOf_s_util_Failure(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_util_Failure)))
+}
+function $asArrayOf_s_util_Failure(obj, depth) {
+  return (($isArrayOf_s_util_Failure(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.util.Failure;", depth))
+}
+var $d_s_util_Failure = new $TypeData().initClass({
+  s_util_Failure: 0
+}, false, "scala.util.Failure", {
+  s_util_Failure: 1,
+  s_util_Try: 1,
+  O: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+});
+$c_s_util_Failure.prototype.$classData = $d_s_util_Failure;
+/** @constructor */
 function $c_s_util_Left(value) {
   this.s_util_Left__f_value = null;
   this.s_util_Left__f_value = value
@@ -20598,6 +20639,73 @@ var $d_s_util_Right = new $TypeData().initClass({
 });
 $c_s_util_Right.prototype.$classData = $d_s_util_Right;
 /** @constructor */
+function $c_s_util_Success(value) {
+  this.s_util_Success__f_value = null;
+  this.s_util_Success__f_value = value
+}
+$c_s_util_Success.prototype = new $h_s_util_Try();
+$c_s_util_Success.prototype.constructor = $c_s_util_Success;
+/** @constructor */
+function $h_s_util_Success() {
+  /*<skip>*/
+}
+$h_s_util_Success.prototype = $c_s_util_Success.prototype;
+$c_s_util_Success.prototype.get__O = (function() {
+  return this.s_util_Success__f_value
+});
+$c_s_util_Success.prototype.productPrefix__T = (function() {
+  return "Success"
+});
+$c_s_util_Success.prototype.productArity__I = (function() {
+  return 1
+});
+$c_s_util_Success.prototype.productElement__I__O = (function(x$1) {
+  return ((x$1 === 0) ? this.s_util_Success__f_value : $m_sr_Statics$().ioobe__I__O(x$1))
+});
+$c_s_util_Success.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this)
+});
+$c_s_util_Success.prototype.productElementName__I__T = (function(x$1) {
+  return ((x$1 === 0) ? "value" : $as_T($m_sr_Statics$().ioobe__I__O(x$1)))
+});
+$c_s_util_Success.prototype.hashCode__I = (function() {
+  var this$2 = $m_s_util_hashing_MurmurHash3$();
+  return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+});
+$c_s_util_Success.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this)
+});
+$c_s_util_Success.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true
+  } else if ((x$1 instanceof $c_s_util_Success)) {
+    var Success$1 = $as_s_util_Success(x$1);
+    return $m_sr_BoxesRunTime$().equals__O__O__Z(this.s_util_Success__f_value, Success$1.s_util_Success__f_value)
+  } else {
+    return false
+  }
+});
+function $as_s_util_Success(obj) {
+  return (((obj instanceof $c_s_util_Success) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.util.Success"))
+}
+function $isArrayOf_s_util_Success(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_util_Success)))
+}
+function $asArrayOf_s_util_Success(obj, depth) {
+  return (($isArrayOf_s_util_Success(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.util.Success;", depth))
+}
+var $d_s_util_Success = new $TypeData().initClass({
+  s_util_Success: 0
+}, false, "scala.util.Success", {
+  s_util_Success: 1,
+  s_util_Try: 1,
+  O: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+});
+$c_s_util_Success.prototype.$classData = $d_s_util_Success;
+/** @constructor */
 function $c_s_util_parsing_combinator_Parsers$Success(outer, result, next) {
   this.s_util_parsing_combinator_Parsers$ParseResult__f_$outer = null;
   this.s_util_parsing_combinator_Parsers$Success__f_result = null;
@@ -20626,9 +20734,6 @@ $c_s_util_parsing_combinator_Parsers$Success.prototype.flatMapWithNext__F1__s_ut
 });
 $c_s_util_parsing_combinator_Parsers$Success.prototype.append__F0__s_util_parsing_combinator_Parsers$ParseResult = (function(a) {
   return this
-});
-$c_s_util_parsing_combinator_Parsers$Success.prototype.get__O = (function() {
-  return this.s_util_parsing_combinator_Parsers$Success__f_result
 });
 $c_s_util_parsing_combinator_Parsers$Success.prototype.toString__T = (function() {
   var this$1 = this.s_util_parsing_combinator_Parsers$Success__f_next;
@@ -21756,6 +21861,95 @@ var $d_Ltenet_simulator_asm_Asm$Set = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Ltenet_simulator_asm_Asm$Set.prototype.$classData = $d_Ltenet_simulator_asm_Asm$Set;
+class $c_Ltenet_simulator_parse_ParseError extends $c_jl_Throwable {
+  constructor(message, cause) {
+    super();
+    this.Ltenet_simulator_parse_ParseError__f_message = null;
+    this.Ltenet_simulator_parse_ParseError__f_cause = null;
+    this.Ltenet_simulator_parse_ParseError__f_message = message;
+    this.Ltenet_simulator_parse_ParseError__f_cause = cause;
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, message, cause, true, true)
+  };
+  productPrefix__T() {
+    return "ParseError"
+  };
+  productArity__I() {
+    return 2
+  };
+  productElement__I__O(x$1) {
+    switch (x$1) {
+      case 0: {
+        return this.Ltenet_simulator_parse_ParseError__f_message;
+        break
+      }
+      case 1: {
+        return this.Ltenet_simulator_parse_ParseError__f_cause;
+        break
+      }
+      default: {
+        return $m_sr_Statics$().ioobe__I__O(x$1)
+      }
+    }
+  };
+  productIterator__sc_Iterator() {
+    return new $c_sr_ScalaRunTime$$anon$1(this)
+  };
+  productElementName__I__T(x$1) {
+    switch (x$1) {
+      case 0: {
+        return "message";
+        break
+      }
+      case 1: {
+        return "cause";
+        break
+      }
+      default: {
+        return $as_T($m_sr_Statics$().ioobe__I__O(x$1))
+      }
+    }
+  };
+  hashCode__I() {
+    var this$2 = $m_s_util_hashing_MurmurHash3$();
+    return this$2.productHash__s_Product__I__Z__I(this, (-889275714), false)
+  };
+  equals__O__Z(x$1) {
+    if ((this === x$1)) {
+      return true
+    } else if ((x$1 instanceof $c_Ltenet_simulator_parse_ParseError)) {
+      var ParseError$1 = $as_Ltenet_simulator_parse_ParseError(x$1);
+      if ((this.Ltenet_simulator_parse_ParseError__f_message === ParseError$1.Ltenet_simulator_parse_ParseError__f_message)) {
+        var x = this.Ltenet_simulator_parse_ParseError__f_cause;
+        var x$2 = ParseError$1.Ltenet_simulator_parse_ParseError__f_cause;
+        return ((x === null) ? (x$2 === null) : x.equals__O__Z(x$2))
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  };
+}
+function $as_Ltenet_simulator_parse_ParseError(obj) {
+  return (((obj instanceof $c_Ltenet_simulator_parse_ParseError) || (obj === null)) ? obj : $throwClassCastException(obj, "tenet.simulator.parse.ParseError"))
+}
+function $isArrayOf_Ltenet_simulator_parse_ParseError(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Ltenet_simulator_parse_ParseError)))
+}
+function $asArrayOf_Ltenet_simulator_parse_ParseError(obj, depth) {
+  return (($isArrayOf_Ltenet_simulator_parse_ParseError(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Ltenet.simulator.parse.ParseError;", depth))
+}
+var $d_Ltenet_simulator_parse_ParseError = new $TypeData().initClass({
+  Ltenet_simulator_parse_ParseError: 0
+}, false, "tenet.simulator.parse.ParseError", {
+  Ltenet_simulator_parse_ParseError: 1,
+  jl_Throwable: 1,
+  O: 1,
+  Ljava_io_Serializable: 1,
+  s_Product: 1,
+  s_Equals: 1
+});
+$c_Ltenet_simulator_parse_ParseError.prototype.$classData = $d_Ltenet_simulator_parse_ParseError;
 /** @constructor */
 function $c_Ltenet_simulator_register_RegisterName$Eax() {
   /*<skip>*/
@@ -23374,6 +23568,9 @@ function $h_s_util_parsing_combinator_Parsers$Failure() {
   /*<skip>*/
 }
 $h_s_util_parsing_combinator_Parsers$Failure.prototype = $c_s_util_parsing_combinator_Parsers$Failure.prototype;
+$c_s_util_parsing_combinator_Parsers$Failure.prototype.msg__T = (function() {
+  return this.s_util_parsing_combinator_Parsers$NoSuccess__f_msg
+});
 $c_s_util_parsing_combinator_Parsers$Failure.prototype.next__s_util_parsing_input_Reader = (function() {
   return this.s_util_parsing_combinator_Parsers$NoSuccess__f_next
 });
