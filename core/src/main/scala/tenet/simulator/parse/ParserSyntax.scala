@@ -12,14 +12,19 @@ object ParserSyntax {
 
     val name: Parser[String] = """\w+""".r
 
-    def registersName: Parser[RegisterName] =
-      name.map { str =>
-        str.toLowerCase match {
-          case "eax" => Eax()
-          case "ebx" => Ebx()
-          case "ecx" => Ecx()
-        }
+    def registersName: Parser[RegisterName] = Parser { in =>
+      name(in) match {
+        case Success(str, next) =>
+          str.toLowerCase match {
+            case "eax" => Success(Eax(), next)
+            case "ebx" => Success(Ebx(), next)
+            case "ecx" => Success(Ecx(), next)
+            case _ => Failure("Register name is invalid", next)
+          }
+        case _: NoSuccess =>
+          Failure("Register name is needed", in)
       }
+    }
 
     val delimiter: Parser[String] =
       whiteSpace.* ~> ",".r <~ whiteSpace.*

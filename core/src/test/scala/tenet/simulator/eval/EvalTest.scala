@@ -9,7 +9,6 @@ import tenet.simulator.asm.Asm.Jz
 import tenet.simulator.asm.Asm.Label
 import tenet.simulator.asm.Asm.Mov
 import tenet.simulator.asm.Asm.Mul
-import tenet.simulator.eval.Eval.MachineState
 import tenet.simulator.register.Flags
 import tenet.simulator.register.RegisterName.Eax
 import tenet.simulator.register.RegisterName.Ebx

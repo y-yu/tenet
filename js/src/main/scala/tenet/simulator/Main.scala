@@ -16,20 +16,10 @@ object Main {
   private val random = new Random()
 
   @JSExport
-  def parse(
+  def execute(
     source: String
-  ): String = try {
-    parser.parse(source).mkString("\n")
-  } catch {
-    case NonFatal(e) =>
-      e.getMessage
-  }
-
-  @JSExport
-  def eval(
-    source: String
-  ): js.Tuple3[String, String, Boolean] = try {
-    val asm = parser.parse(source)
+  ): js.Tuple5[String, String, String, String, Boolean] = try {
+    val asm = parser.parse(source).get
     val randomNumber = random.nextInt(100).abs
 
     val forwardResult = eval.run(
@@ -44,15 +34,22 @@ object Main {
     )
 
     (
+      asm.mkString("\n"),
       forwardResult.registers.pp,
       backwardResult.registers.pp,
+      forwardResult.commandLogs.mkString("\n"),
       forwardResult.registers.eax == 0 &&
         backwardResult.registers.eax == randomNumber
     )
   } catch {
     case NonFatal(e) =>
-      (e.getMessage,
+      // TODO: Gently error reporting
+      (
         e.getMessage,
-        false)
+        e.getMessage,
+        e.getMessage,
+        e.getMessage,
+        false
+      )
   }
 }
