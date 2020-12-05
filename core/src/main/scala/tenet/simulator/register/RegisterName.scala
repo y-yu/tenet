@@ -1,4 +1,4 @@
-package register
+package tenet.simulator.register
 
 sealed trait RegisterName
 

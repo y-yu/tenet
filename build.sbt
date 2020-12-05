@@ -1,10 +1,122 @@
-name := "tenet"
+import ReleaseTransformations._
+import UpdateReadme.updateReadme
 
-version := "0.1"
-
-scalaVersion := "2.13.4"
-
-libraryDependencies ++= Seq(
-  "com.lihaoyi" %% "pprint" % "0.6.0",
-  "org.scalatest" %% "scalatest" % "3.2.3" % "test",
+val scala213Version = "2.13.4"
+val defaultScalacOptions = Seq(
+  "-deprecation",
+  "-encoding", "UTF-8",
+  "-Xlint",
+  "-language:implicitConversions", "-language:higherKinds", "-language:existentials",
+  "-unchecked"
 )
+
+lazy val root = project.in(file("."))
+  .settings(
+    publishArtifact := false,
+    publish := {},
+    publishLocal := {}
+  )
+  .settings(publishSettings)
+  .aggregate(
+    tenetSimulatorCoreJVM,
+    tenetSimulatorCoreJS,
+    tenetSimulatorJS,
+    tenetSimulatorJVM
+  )
+
+lazy val tenetSimulator = (crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Full) in file("."))
+  .settings(
+    scalaVersion := scala213Version,
+    scalacOptions ++= defaultScalacOptions,
+    publishArtifact := false,
+    publish := {},
+    publishLocal := {}
+  )
+  .settings(publishSettings)
+  .dependsOn(
+    tenetSimulatorCore
+  )
+  .jsSettings(
+    scalacOptions += {
+      val a = (baseDirectory in LocalRootProject).value.toURI.toString
+      val g = "https://raw.githubusercontent.com/y-yu/tenet-simulator/" + tagOrHash.value
+      s"-P:scalajs:mapSourceURI:$a->$g/"
+    }
+  )
+  .jvmSettings(
+    mainClass := Some("tenet.simulator.Main")
+  )
+
+lazy val tenetSimulatorCore = (crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure) in file("./core"))
+  .settings(
+    organization := "com.github.y-yu",
+    name := "tenet-simulator",
+    description := "Simulator of ``Tenet'' of HITCON CTF 2020",
+    homepage := Some(url("https://github.com/y-yu")),
+    licenses := Seq("MIT" -> url(s"https://github.com/y-yu/tenet-simulator/blob/master/LICENSE")),
+    scalaVersion := scala213Version,
+    scalacOptions ++= defaultScalacOptions,
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %%% "pprint" % "0.6.0",
+      "org.scala-lang.modules" %%% "scala-parser-combinators" % "1.1.2",
+      "org.scalatest" %%% "scalatest" % "3.2.3" % "test"
+    )
+  )
+  .settings(publishSettings)
+
+lazy val tenetSimulatorCoreJVM = tenetSimulatorCore.jvm
+lazy val tenetSimulatorCoreJS = tenetSimulatorCore.js
+
+lazy val tenetSimulatorJVM = tenetSimulator.jvm
+lazy val tenetSimulatorJS = tenetSimulator.js
+
+lazy val publishSettings = Seq(
+  publishMavenStyle := true,
+  publishTo := Some(
+    if (isSnapshot.value)
+      Opts.resolver.sonatypeSnapshots
+    else
+      Opts.resolver.sonatypeStaging
+  ),
+  publishArtifact in Test := false,
+  pomExtra :=
+    <developers>
+      <developer>
+        <id>y-yu</id>
+        <name>Yoshimura Hikaru</name>
+        <url>https://github.com/y-yu</url>
+      </developer>
+    </developers>
+      <scm>
+        <url>git@github.com:y-yu/tenet-simulator.git</url>
+        <connection>scm:git:git@github.com:y-yu/tenet-simulator.git</connection>
+        <tag>{tagOrHash.value}</tag>
+      </scm>,
+  releaseTagName := tagName.value,
+  releaseCrossBuild := false,
+  releaseProcess := Seq[ReleaseStep](
+    checkSnapshotDependencies,
+    inquireVersions,
+    runClean,
+    runTest,
+    setReleaseVersion,
+    updateReadme,
+    commitReleaseVersion,
+    tagRelease,
+    releaseStepCommandAndRemaining("^ publishSigned"),
+    setNextVersion,
+    updateReadme,
+    commitNextVersion,
+    releaseStepCommand("sonatypeReleaseAll"),
+    pushChanges
+  )
+)
+
+val tagName = Def.setting {
+  s"v${if (releaseUseGlobalVersion.value) (version in ThisBuild).value else version.value}"
+}
+
+val tagOrHash = Def.setting {
+  if (isSnapshot.value) sys.process.Process("git rev-parse HEAD").lineStream_!.head
+  else tagName.value
+}

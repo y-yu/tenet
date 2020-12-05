@@ -1,7 +1,12 @@
-Tenet
+Tenet simulator HITCON CTF 2020
 =============================
+![CI](https://github.com/y-yu/tenet-simulator/workflows/CI/badge.svg?branch=master)
 
-Cheep assembly language emulator to solve https://github.com/FrenchRoomba/ctf-writeup-HITCON-CTF-2020/blob/master/tenet/README.md . 
+Cheep assembly language emulator to solve [Tenet in HITCON CTF 2020](https://ctftime.org/task/14033).
+
+## Demo
+
+Scala.js demo is here: http://y-yu.github.io/tenet-simulator
 
 ## How to run
 
